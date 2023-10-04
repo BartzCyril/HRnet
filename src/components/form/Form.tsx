@@ -5,6 +5,7 @@ import CustomSelect from "./CustomSelect.tsx";
 import DateTime, {Value} from "./DateTime.tsx";
 import {useDispatch} from "react-redux";
 import {createEmployee} from "../../utils/slice/employeeSlice.ts";
+import {Modal} from "../Modal.tsx";
 
 export function Form() {
     
@@ -17,6 +18,11 @@ export function Form() {
     const [startDate, setStartDate] = useState<Value>(new Date());
     const [selectedOptionState, setSelectedOptionState] = useState<SelectOptions | null>(null);
     const [selectedOptionDepartment, setSelectedOptionDepartment] = useState<SelectOptions | null>(null);
+    const [open, setOpen] = useState(true)
+
+    const handleOpen = () => {
+        setOpen(!open)
+    }
 
     const dispatch = useDispatch()
 
@@ -50,6 +56,9 @@ export function Form() {
             </fieldset>
             <CustomSelect name="Department" onChange={setSelectedOptionDepartment} value={selectedOptionDepartment} options={department}/>
             <button type="submit" className="btn btn-primary btn" style={{marginTop: "1rem"}}>Save</button>
+            <Modal open={open} onClose={handleOpen} showClose={true} escapeClose={true} clickClose={true}>
+                <div>Employee Created!</div>
+            </Modal>
         </form>
     )
 }

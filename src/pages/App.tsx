@@ -1,12 +1,16 @@
-import {Form} from "../components/form/Form.tsx";
+import {Form} from "../components/Form/Form.tsx";
+import {Header} from "../components/Header.tsx";
 
 export function App() {
 
   return (
-      <section className="container mx-auto">
-        <h1 className="text-center">Create Employee</h1>
-        <Form/>
-      </section>
+      <>
+          <Header/>
+          <section className="container mx-auto">
+              <h1 className="text-center">Create Employee</h1>
+              <Form/>
+          </section>
+      </>
   )
 }
 

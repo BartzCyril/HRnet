@@ -5,7 +5,7 @@ import CustomSelect from "./CustomSelect.tsx";
 import DateTime, {Value} from "./DateTime.tsx";
 import {useDispatch} from "react-redux";
 import {createEmployee} from "../../utils/slice/employeeSlice.ts";
-import {Modal} from "../Modal.tsx";
+import {Modal} from "../Modal/Modal.tsx";
 
 export function Form() {
     
@@ -18,7 +18,7 @@ export function Form() {
     const [startDate, setStartDate] = useState<Value>(new Date());
     const [selectedOptionState, setSelectedOptionState] = useState<SelectOptions | null>(null);
     const [selectedOptionDepartment, setSelectedOptionDepartment] = useState<SelectOptions | null>(null);
-    const [open, setOpen] = useState(true)
+    const [open, setOpen] = useState(false)
 
     const handleOpen = () => {
         setOpen(!open)
@@ -28,17 +28,20 @@ export function Form() {
 
     const handleSubmit = (e: { preventDefault: () => void; }) => {
         e.preventDefault()
-        dispatch(createEmployee({
-            firstName,
-            lastName,
-            street,
-            city,
-            zipCode,
-            dateOfBirth: dateOfBirth?.toLocaleDateString(),
-            startDate: startDate?.toLocaleDateString(),
-            selectedOptionState: selectedOptionState?.value,
-            selectedOptionDepartment: selectedOptionDepartment?.value
-        }))
+        for (let i=0; i < 100; i++) {
+            dispatch(createEmployee({
+                firstName,
+                lastName,
+                street,
+                city,
+                zipCode,
+                dateOfBirth: dateOfBirth?.toLocaleDateString(),
+                startDate: startDate?.toLocaleDateString(),
+                selectedOptionState: selectedOptionState?.abbreviation,
+                selectedOptionDepartment: selectedOptionDepartment?.value
+            }))
+        }
+        handleOpen()
     }
 
     return (
@@ -56,7 +59,7 @@ export function Form() {
             </fieldset>
             <CustomSelect name="Department" onChange={setSelectedOptionDepartment} value={selectedOptionDepartment} options={department}/>
             <button type="submit" className="btn btn-primary btn" style={{marginTop: "1rem"}}>Save</button>
-            <Modal open={open} onClose={handleOpen} showClose={true} escapeClose={true} clickClose={true}>
+            <Modal open={open} onClose={handleOpen}>
                 <div>Employee Created!</div>
             </Modal>
         </form>

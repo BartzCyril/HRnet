@@ -9,6 +9,7 @@ import {createBrowserRouter, RouterProvider} from "react-router-dom";
 import {Provider} from "react-redux";
 import {store} from "./utils/slice/employeeSlice.ts";
 import {Error} from "./pages/Error.tsx";
+import {CurrentEmployees} from "./pages/CurrentEmployees.tsx";
 
 const router = createBrowserRouter([
     {
@@ -18,6 +19,7 @@ const router = createBrowserRouter([
     },
     {
         path: '/employee-list',
+        element: <CurrentEmployees/>
     },
 ])
 

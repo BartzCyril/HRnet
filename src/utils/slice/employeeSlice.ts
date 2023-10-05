@@ -1,6 +1,6 @@
 import {configureStore, createSlice} from "@reduxjs/toolkit";
 
-interface Employee {
+export interface Employee {
     firstName: string,
     lastName: string,
     street: string,
@@ -10,6 +10,10 @@ interface Employee {
     startDate: string,
     selectedOptionState: string,
     selectedOptionDepartment: string
+}
+
+export interface EmployeeSelector {
+    employees: Employee
 }
 
 type stateStore = Employee[]
@@ -28,6 +32,6 @@ export const {createEmployee} = employeeSlice.actions
 
 export const store = configureStore({
     reducer: {
-        user: employeeSlice.reducer
+        employees: employeeSlice.reducer
     }
 })

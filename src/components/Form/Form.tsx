@@ -5,7 +5,7 @@ import CustomSelect from "./CustomSelect.tsx";
 import DateTime, {Value} from "./DateTime.tsx";
 import {useDispatch} from "react-redux";
 import {createEmployee} from "../../utils/slice/employeeSlice.ts";
-import {Modal} from "../Modal/Modal.tsx";
+import {Modal} from "modal-cyril-bartz";
 
 export function Form() {
     
@@ -28,19 +28,17 @@ export function Form() {
 
     const handleSubmit = (e: { preventDefault: () => void; }) => {
         e.preventDefault()
-        for (let i=0; i < 100; i++) {
-            dispatch(createEmployee({
-                firstName,
-                lastName,
-                street,
-                city,
-                zipCode,
-                dateOfBirth: dateOfBirth?.toLocaleDateString(),
-                startDate: startDate?.toLocaleDateString(),
-                selectedOptionState: selectedOptionState?.abbreviation,
-                selectedOptionDepartment: selectedOptionDepartment?.value
-            }))
-        }
+        dispatch(createEmployee({
+            firstName,
+            lastName,
+            street,
+            city,
+            zipCode,
+            dateOfBirth: dateOfBirth?.toLocaleDateString(),
+            startDate: startDate?.toLocaleDateString(),
+            selectedOptionState: selectedOptionState?.abbreviation,
+            selectedOptionDepartment: selectedOptionDepartment?.value
+        }))
         handleOpen()
     }
 

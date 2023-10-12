@@ -13,12 +13,12 @@ import {CurrentEmployees} from "./pages/CurrentEmployees.tsx";
 
 const router = createBrowserRouter([
     {
-        path: '/',
+        path: '/vite-react-router/',
         element: <App />,
         errorElement: <Error />,
     },
     {
-        path: '/employee-list',
+        path: '/vite-react-router/employee-list',
         element: <CurrentEmployees/>
     },
 ])

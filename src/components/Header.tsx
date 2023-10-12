@@ -5,7 +5,7 @@ export function Header() {
         <header>
             <nav className="navbar navbar-expand-lg navbar-light p-4">
                 <Link to="/HRnet/" className="navbar-brand">
-                    <img src="/img/logo.svg" alt="logo" width={50} height={50}/>
+                    <img src="/HRnet/img/logo.svg" alt="logo" width={50} height={50}/>
                 </Link>
                 <div>
                     <ul className="navbar-nav">

@@ -5,10 +5,10 @@ import {createEmployee} from "../utils/slice/employeeSlice.ts";
 import {fakeEmployees} from "../data/fakeEmployee.ts";
 
 export function CurrentEmployees() {
-    
+
     const dispatch = useDispatch()
 
-    for (let i= 0; i < 1000; i++) {
+    for (let i= 0; i < 5000; i++) {
         dispatch(createEmployee({
             firstName: fakeEmployees[0].firstName,
             lastName: fakeEmployees[0].lastName,

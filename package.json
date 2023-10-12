@@ -1,5 +1,6 @@
 {
   "name": "hrnet",
+  "homepage": "https://bartzcyril.github.io/HRnet/",
   "private": true,
   "version": "0.0.0",
   "type": "module",

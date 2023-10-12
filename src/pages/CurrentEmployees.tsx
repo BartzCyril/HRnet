@@ -8,7 +8,7 @@ export function CurrentEmployees() {
 
     const dispatch = useDispatch()
 
-    for (let i= 0; i < 5000; i++) {
+    for (let i= 0; i < 1000; i++) {
         dispatch(createEmployee({
             firstName: fakeEmployees[0].firstName,
             lastName: fakeEmployees[0].lastName,

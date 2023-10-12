@@ -16,8 +16,8 @@ export function Form() {
     const [zipCode, setZipCode] = useState("")
     const [dateOfBirth, setDateOfBirth] = useState<Value>(new Date());
     const [startDate, setStartDate] = useState<Value>(new Date());
-    const [selectedOptionState, setSelectedOptionState] = useState<SelectOptions | null>(null);
-    const [selectedOptionDepartment, setSelectedOptionDepartment] = useState<SelectOptions | null>(null);
+    const [selectedOptionState, setSelectedOptionState] = useState<SelectOptions | null>(states[0]);
+    const [selectedOptionDepartment, setSelectedOptionDepartment] = useState<SelectOptions | null>(department[0]);
     const [open, setOpen] = useState(false)
 
     const handleOpen = () => {

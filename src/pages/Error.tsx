@@ -7,7 +7,7 @@ export function Error() {
                 <div>404</div>
                 <p>Oups! La page que vous demandez n'existe pas.</p>
             </div>
-            <Link to="/">
+            <Link to="/HRnet/">
                 Retourner sur la page d’accueil
             </Link>
         </div>

@@ -10,10 +10,10 @@ export function Header() {
                 <div>
                     <ul className="navbar-nav">
                         <li className="nav-item">
-                            <Link to="/" className="nav-link">Home</Link>
+                            <Link to="/vite-react-router/" className="nav-link">Home</Link>
                         </li>
                         <li className="nav-item">
-                            <Link to="/employee-list" className="nav-link">View Current Employees</Link>
+                            <Link to="/vite-react-router/employee-list" className="nav-link">View Current Employees</Link>
                         </li>
                     </ul>
                 </div>

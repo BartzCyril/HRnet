@@ -5,7 +5,7 @@ import CustomSelect from "./CustomSelect.tsx";
 import DateTime, {Value} from "./DateTime.tsx";
 import {useDispatch} from "react-redux";
 import {createEmployee} from "../../utils/slice/employeeSlice.ts";
-import {Modal} from "modal-cyril-bartz";
+import {Modal, useToggle} from "modal-cyril-bartz";
 
 export function Form() {
     
@@ -18,11 +18,7 @@ export function Form() {
     const [startDate, setStartDate] = useState<Value>(new Date());
     const [selectedOptionState, setSelectedOptionState] = useState<SelectOptions | null>(states[0]);
     const [selectedOptionDepartment, setSelectedOptionDepartment] = useState<SelectOptions | null>(department[0]);
-    const [open, setOpen] = useState(false)
-
-    const handleOpen = () => {
-        setOpen(!open)
-    }
+    const {show, toggle} = useToggle(false)
 
     const dispatch = useDispatch()
 
@@ -39,7 +35,7 @@ export function Form() {
             selectedOptionState: selectedOptionState?.abbreviation,
             selectedOptionDepartment: selectedOptionDepartment?.value
         }))
-        handleOpen()
+        toggle()
     }
 
     return (
@@ -57,7 +53,7 @@ export function Form() {
             </fieldset>
             <CustomSelect name="Department" onChange={setSelectedOptionDepartment} value={selectedOptionDepartment} options={department}/>
             <button type="submit" className="btn btn-primary btn" style={{marginTop: "1rem"}}>Save</button>
-            <Modal open={open} onClose={handleOpen}>
+            <Modal open={show} onClose={toggle}>
                 <div>Employee Created!</div>
             </Modal>
         </form>

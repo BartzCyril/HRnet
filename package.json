@@ -11,6 +11,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@faker-js/faker": "^8.2.0",
     "@reduxjs/toolkit": "^1.9.6",
     "bootstrap": "^5.3.2",
     "modal-cyril-bartz": "^1.0.9",

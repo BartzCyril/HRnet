@@ -1,4 +1,4 @@
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import {department, SelectOptions, states} from "../../data/data.ts";
 import Input from "./Input.tsx";
 import CustomSelect from "./CustomSelect.tsx";
@@ -6,6 +6,7 @@ import DateTime, {Value} from "./DateTime.tsx";
 import {useDispatch} from "react-redux";
 import {createEmployee} from "../../utils/slice/employeeSlice.ts";
 import {Modal, useToggle} from "modal-cyril-bartz";
+import {getEmployeeList} from "../../api/employee.ts";
 
 export function Form() {
     
@@ -21,6 +22,23 @@ export function Form() {
     const {show, toggle} = useToggle(false)
 
     const dispatch = useDispatch()
+
+    useEffect(() => {
+        const fakeEmployees = getEmployeeList()
+        for (let i=0; i < fakeEmployees.length; i++) {
+            dispatch(createEmployee({
+                firstName: fakeEmployees[i].firstName,
+                lastName: fakeEmployees[i].lastName,
+                street: fakeEmployees[i].street,
+                city: fakeEmployees[i].city,
+                zipCode: fakeEmployees[i].zipCode,
+                dateOfBirth: fakeEmployees[i].dateOfBirth,
+                startDate: fakeEmployees[i].startDate,
+                selectedOptionState: fakeEmployees[i].selectedOptionState,
+                selectedOptionDepartment: fakeEmployees[i].selectedOptionDepartment
+            }))
+        }
+    }, []);
 
     const handleSubmit = (e: { preventDefault: () => void; }) => {
         e.preventDefault()

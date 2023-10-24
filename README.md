@@ -1,27 +1,18 @@
-# React + TypeScript + Vite
+# HRnet
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Sujet
 
-Currently, two official plugins are available:
+Vous travaillez pour le département technologique de WealthHealth, une grande société financière. 
+L'application web interne, HRnet, gère les dossiers des employés mais présente des problèmes majeurs liés à l'utilisation de jQuery. 
+Une mise à niveau vers React est en cours. 
+Vous êtes chargé de cette conversion. 
+Jade, votre collègue développeuse, vous guide dans le processus.
+Vous devrez convertir HRnet en React, remplacer les plugins jQuery et effectuer des tests de performance. 
+Le but est d'éliminer complètement jQuery de l'application. 
+Veillez à suivre les bonnes pratiques de développement en React.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Site
 
-## Expanding the ESLint configuration
+Site HRnet : https://bartzcyril.github.io/HRnet/
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
 
-- Configure the top-level `parserOptions` property like this:
-
-```js
-   parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-   },
-```
-
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list

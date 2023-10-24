@@ -1,5 +1,6 @@
 import DateTimePicker from "react-datetime-picker";
-import {memo, useId} from "react";
+import {memo, useEffect, useId} from "react";
+import {Employee} from "../../interface/interface.ts";
 
 export type Value = Date | null
 
@@ -7,11 +8,17 @@ type DateTimeProps = {
     onChange: (value: Value) => void
     value: Value
     name: string
+    funcErrors: ((type: keyof Employee, value: Date | null) => void)[]
+    keyEmployee: keyof Employee
 }
 
-function DateTime({onChange, value, name}: DateTimeProps) {
+function DateTime({onChange, value, name, funcErrors, keyEmployee}: DateTimeProps) {
 
     const id = useId()
+
+    useEffect(() => {
+        funcErrors.forEach(func => func(keyEmployee, value));
+    }, [value]);
 
     return (
         <div className="d-flex flex-column col-md-6">

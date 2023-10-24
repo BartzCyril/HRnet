@@ -7,6 +7,8 @@ import {useDispatch} from "react-redux";
 import {createEmployee} from "../../utils/slice/employeeSlice.ts";
 import {Modal, useToggle} from "modal-cyril-bartz";
 import {getEmployeeList} from "../../api/employee.ts";
+import {useFormErrors} from "../../hooks/useFormErrors.ts";
+import {Error} from "./Error.tsx";
 
 export function Form() {
     
@@ -22,6 +24,8 @@ export function Form() {
     const {show, toggle} = useToggle(false)
 
     const dispatch = useDispatch()
+
+    const {errors, verifyDate, dataEmpty} = useFormErrors()
 
     useEffect(() => {
         const fakeEmployees = getEmployeeList()
@@ -42,31 +46,51 @@ export function Form() {
 
     const handleSubmit = (e: { preventDefault: () => void; }) => {
         e.preventDefault()
-        dispatch(createEmployee({
-            firstName,
-            lastName,
-            street,
-            city,
-            zipCode,
-            dateOfBirth: dateOfBirth?.toLocaleDateString(),
-            startDate: startDate?.toLocaleDateString(),
-            selectedOptionState: selectedOptionState?.abbreviation,
-            selectedOptionDepartment: selectedOptionDepartment?.value
-        }))
-        toggle()
+
+        let hasErrors = false
+
+        for (const key in errors) {
+            if (errors[key as keyof typeof errors]) {
+                hasErrors = true
+                break
+            }
+        }
+
+        if (!hasErrors) {
+            dispatch(createEmployee({
+                firstName,
+                lastName,
+                street,
+                city,
+                zipCode,
+                dateOfBirth: dateOfBirth?.toLocaleDateString(),
+                startDate: startDate?.toLocaleDateString(),
+                selectedOptionState: selectedOptionState?.abbreviation,
+                selectedOptionDepartment: selectedOptionDepartment?.value
+            }))
+            toggle()
+        }
+
     }
 
     return (
         <form onSubmit={handleSubmit} action="#">
-            <Input type="text" name="First Name" onChange={setFirstName} value={firstName}/>
-            <Input type="text" name="Last Name" onChange={setLastName} value={lastName}/>
-            <DateTime onChange={setDateOfBirth} value={dateOfBirth} name="Date of Birth"/>
-            <DateTime onChange={setStartDate} value={startDate} name="Start Date"/>
+            <Input type="text" name="First Name" onChange={setFirstName} value={firstName} keyEmployee="firstName" funcErrors={[dataEmpty]}/>
+            {errors.firstName !== "" && <Error message={errors.firstName}/>}
+            <Input type="text" name="Last Name" onChange={setLastName} value={lastName} funcErrors={[dataEmpty]} keyEmployee="lastName"/>
+            {errors.lastName !== "" && <Error message={errors.lastName}/>}
+            <DateTime onChange={setDateOfBirth} value={dateOfBirth} name="Date of Birth" funcErrors={[dataEmpty, verifyDate]} keyEmployee="dateOfBirth"/>
+            {errors.dateOfBirth !== "" && <Error message={errors.dateOfBirth}/>}
+            <DateTime onChange={setStartDate} value={startDate} name="Start Date" funcErrors={[dataEmpty, verifyDate]} keyEmployee="startDate"/>
+            {errors.startDate !== "" && <Error message={errors.startDate}/>}
             <fieldset className="border p-2">
                 <legend className="float-none w-auto p-2">Address</legend>
-                <Input type="text" name="Street" onChange={setStreet} value={street}/>
-                <Input type="text" name="City" onChange={setCity} value={city}/>
-                <Input type="number" name="Zip Code" onChange={setZipCode} value={zipCode}/>
+                <Input type="text" name="Street" onChange={setStreet} value={street} keyEmployee="street" funcErrors={[dataEmpty]}/>
+                {errors.street !== "" && <Error message={errors.street}/>}
+                <Input type="text" name="City" onChange={setCity} value={city} keyEmployee="city" funcErrors={[dataEmpty]}/>
+                {errors.city !== "" && <Error message={errors.city}/>}
+                <Input type="number" name="Zip Code" onChange={setZipCode} value={zipCode} keyEmployee="zipCode" funcErrors={[dataEmpty]}/>
+                {errors.zipCode !== "" && <Error message={errors.zipCode}/>}
                 <CustomSelect name="State" onChange={setSelectedOptionState} value={selectedOptionState} options={states}/>
             </fieldset>
             <CustomSelect name="Department" onChange={setSelectedOptionDepartment} value={selectedOptionDepartment} options={department}/>

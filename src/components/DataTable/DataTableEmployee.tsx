@@ -2,7 +2,8 @@ import {useState} from "react";
 import Input from "../Form/Input.tsx";
 import DataTable, {TableColumn} from "react-data-table-component";
 import {useSelector} from "react-redux";
-import {Employee, EmployeeSelector} from "../../utils/slice/employeeSlice.ts";
+import {EmployeeSelector} from "../../utils/slice/employeeSlice.ts";
+import {Employee} from "../../interface/interface.ts";
 
 const columns: TableColumn<Employee>[] = [
     {

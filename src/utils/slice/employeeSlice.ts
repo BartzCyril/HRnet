@@ -1,16 +1,5 @@
 import {configureStore, createSlice} from "@reduxjs/toolkit";
-
-export interface Employee {
-    firstName: string,
-    lastName: string,
-    street: string,
-    city: string,
-    zipCode: string,
-    dateOfBirth: string,
-    startDate: string,
-    selectedOptionState: string,
-    selectedOptionDepartment: string
-}
+import {Employee} from "../../interface/interface.ts";
 
 export interface EmployeeSelector {
     employees: Employee

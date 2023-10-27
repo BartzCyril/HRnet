@@ -1,5 +1,21 @@
 # HRnet
 
+## Prérequis
+
+[Node.js >= v14](https://nodejs.org/en/)
+
+## Installer les dépendances
+
+```shell
+npm i
+```
+
+## Lancer le serveur de développement
+
+```shell
+npm run dev
+```
+
 ## Sujet
 
 Vous travaillez pour le département technologique de WealthHealth, une grande société financière. 

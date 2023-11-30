@@ -28,7 +28,7 @@ J'ai également créé et publié un composant réutilisable, une modale, sur np
 
 ## Site
 
-Site HRnet : [HRnet](https://bartzcyril.github.io/HRnet/)
+[HRnet](https://bartzcyril.github.io/HRnet/)
 
 
 

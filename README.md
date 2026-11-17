@@ -9,9 +9,9 @@
 ![Bootstrap](https://img.shields.io/badge/Bootstrap-7952B3?logo=bootstrap&logoColor=white)
 ![GitHub Actions](https://img.shields.io/badge/GitHub_Actions-2088FF?logo=githubactions&logoColor=white)
 
-## Démo en ligne
+**👉 Voir le site : [bartzcyril.github.io/HRnet](https://bartzcyril.github.io/HRnet/)**
 
-**[bartzcyril.github.io/HRnet](https://bartzcyril.github.io/HRnet/)** : créez un employé avec le formulaire, puis consultez-le dans la liste « View Current Employees ». La liste est préremplie avec 25 employés fictifs générés par Faker.
+Créez un employé avec le formulaire, puis consultez-le dans la liste « View Current Employees ». La liste est préremplie avec 25 employés fictifs générés par Faker.
 
 ## Sujet
 

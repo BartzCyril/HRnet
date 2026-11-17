@@ -1,5 +1,7 @@
 # HRnet
 
+**👉 Voir le site : [bartzcyril.github.io/HRnet](https://bartzcyril.github.io/HRnet/)**
+
 ## Sujet
 
 Vous travaillez pour le département technologique de WealthHealth, une grande société financière. 
@@ -25,11 +27,3 @@ Veillez à suivre les bonnes pratiques de développement en React.
 Ce projet m'a permis de démontrer ma maîtrise de React, déjà acquise précédemment, en convertissant HRnet avec succès. 
 
 J'ai également créé et publié un composant réutilisable, une modale, sur npm, renforçant ainsi la maintenabilité et la réutilisabilité du code.
-
-## Site
-
-[HRnet](https://bartzcyril.github.io/HRnet/)
-
-
-
-

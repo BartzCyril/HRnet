@@ -9,6 +9,7 @@ import {Modal, useToggle} from "modal-cyril-bartz";
 import {getEmployeeList} from "../../api/employee.ts";
 import {useFormErrors} from "../../hooks/useFormErrors.ts";
 import {Error} from "./Error.tsx";
+import {Employee} from "../../interface/interface.ts";
 
 export function Form() {
     
@@ -26,6 +27,15 @@ export function Form() {
     const dispatch = useDispatch()
 
     const {errors, verifyDate, dataEmpty} = useFormErrors()
+
+    // Errors are computed from mount (submit needs them) but only shown once the field is edited or the form submitted
+    const [touched, setTouched] = useState<Partial<Record<keyof Employee, boolean>>>({})
+    const [submitted, setSubmitted] = useState(false)
+    const touch = <T,>(key: keyof Employee, set: (value: T) => void) => (value: T) => {
+        set(value)
+        setTouched(prev => ({...prev, [key]: true}))
+    }
+    const showError = (key: keyof Employee) => (submitted || touched[key]) && errors[key] !== ""
 
     useEffect(() => {
         const fakeEmployees = getEmployeeList()
@@ -46,6 +56,7 @@ export function Form() {
 
     const handleSubmit = (e: { preventDefault: () => void; }) => {
         e.preventDefault()
+        setSubmitted(true)
 
         let hasErrors = false
 
@@ -76,22 +87,22 @@ export function Form() {
     return (
         <>
             <form onSubmit={handleSubmit} action="#">
-                <Input type="text" name="First Name" onChange={setFirstName} value={firstName} keyEmployee="firstName" funcErrors={[dataEmpty]}/>
-                {errors.firstName !== "" && <Error message={errors.firstName}/>}
-                <Input type="text" name="Last Name" onChange={setLastName} value={lastName} funcErrors={[dataEmpty]} keyEmployee="lastName"/>
-                {errors.lastName !== "" && <Error message={errors.lastName}/>}
-                <DateTime onChange={setDateOfBirth} value={dateOfBirth} name="Date of Birth" funcErrors={[dataEmpty, verifyDate]} keyEmployee="dateOfBirth"/>
-                {errors.dateOfBirth !== "" && <Error message={errors.dateOfBirth}/>}
-                <DateTime onChange={setStartDate} value={startDate} name="Start Date" funcErrors={[dataEmpty, verifyDate]} keyEmployee="startDate"/>
-                {errors.startDate !== "" && <Error message={errors.startDate}/>}
+                <Input type="text" name="First Name" onChange={touch("firstName", setFirstName)} value={firstName} keyEmployee="firstName" funcErrors={[dataEmpty]}/>
+                {showError("firstName") && <Error message={errors.firstName}/>}
+                <Input type="text" name="Last Name" onChange={touch("lastName", setLastName)} value={lastName} funcErrors={[dataEmpty]} keyEmployee="lastName"/>
+                {showError("lastName") && <Error message={errors.lastName}/>}
+                <DateTime onChange={touch("dateOfBirth", setDateOfBirth)} value={dateOfBirth} name="Date of Birth" funcErrors={[dataEmpty, verifyDate]} keyEmployee="dateOfBirth"/>
+                {showError("dateOfBirth") && <Error message={errors.dateOfBirth}/>}
+                <DateTime onChange={touch("startDate", setStartDate)} value={startDate} name="Start Date" funcErrors={[dataEmpty, verifyDate]} keyEmployee="startDate"/>
+                {showError("startDate") && <Error message={errors.startDate}/>}
                 <fieldset className="border p-2">
                     <legend className="float-none w-auto p-2">Address</legend>
-                    <Input type="text" name="Street" onChange={setStreet} value={street} keyEmployee="street" funcErrors={[dataEmpty]}/>
-                    {errors.street !== "" && <Error message={errors.street}/>}
-                    <Input type="text" name="City" onChange={setCity} value={city} keyEmployee="city" funcErrors={[dataEmpty]}/>
-                    {errors.city !== "" && <Error message={errors.city}/>}
-                    <Input type="number" name="Zip Code" onChange={setZipCode} value={zipCode} keyEmployee="zipCode" funcErrors={[dataEmpty]}/>
-                    {errors.zipCode !== "" && <Error message={errors.zipCode}/>}
+                    <Input type="text" name="Street" onChange={touch("street", setStreet)} value={street} keyEmployee="street" funcErrors={[dataEmpty]}/>
+                    {showError("street") && <Error message={errors.street}/>}
+                    <Input type="text" name="City" onChange={touch("city", setCity)} value={city} keyEmployee="city" funcErrors={[dataEmpty]}/>
+                    {showError("city") && <Error message={errors.city}/>}
+                    <Input type="number" name="Zip Code" onChange={touch("zipCode", setZipCode)} value={zipCode} keyEmployee="zipCode" funcErrors={[dataEmpty]}/>
+                    {showError("zipCode") && <Error message={errors.zipCode}/>}
                     <CustomSelect name="State" onChange={setSelectedOptionState} value={selectedOptionState} options={states}/>
                 </fieldset>
                 <CustomSelect name="Department" onChange={setSelectedOptionDepartment} value={selectedOptionDepartment} options={department}/>
